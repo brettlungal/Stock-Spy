@@ -9,6 +9,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
     private EditText userEmail , userPassword;
+    private Button loginButton;
     private int viewPass = 0;
 
     @Override
@@ -44,7 +46,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         userEmail = findViewById(R.id.signInEmail);
         userPassword = findViewById(R.id.signInPassword);
+        loginButton = findViewById(R.id.loginButton);
         findViewById(R.id.showPassword).setOnClickListener(this);
+        loginButton.setOnClickListener(this);
 
         System.out.println(viewPass);
 
@@ -122,6 +126,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }
 
+                break;
+
+            case R.id.loginButton:
+                userLogin();
                 break;
 
         }
