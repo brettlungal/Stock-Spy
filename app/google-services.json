@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "188890565819",
+    "firebase_url": "https://stockspy-df397.firebaseio.com",
+    "project_id": "stockspy-df397",
+    "storage_bucket": "stockspy-df397.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188890565819:android:1f4642072b382951",
+        "android_client_info": {
+          "package_name": "com.bagunit.stockspy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "188890565819-l9ce3h63u1qiuqrmcfmqec87s2arab9o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bagunit.stockspy",
+            "certificate_hash": "5ddb2e63c0f13967c917e5e332693556d6cc63e7"
+          }
+        },
+        {
+          "client_id": "188890565819-lecrpb82vk0v18er5988fetldlq8thdi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjCBp55PwhS-qlTbt3PbDIEetRstvQzIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "188890565819-lecrpb82vk0v18er5988fetldlq8thdi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
