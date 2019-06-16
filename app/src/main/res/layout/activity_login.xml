@@ -15,7 +15,7 @@
         android:visibility="invisible" />
 
     <EditText
-        android:id="@+id/signInEmail"
+        android:id="@+id/signUpEmail"
         android:layout_width="288dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/signInPassword"
+        android:id="@+id/signUpPassword"
         android:layout_width="288dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
@@ -46,22 +46,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.355"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpEmail" />
 
     <ImageView
         android:id="@+id/showPassword"
         android:layout_width="37dp"
         android:layout_height="33dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.778"
-        app:layout_constraintStart_toStartOf="@+id/signInPassword"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpPassword"
+        app:layout_constraintEnd_toEndOf="@+id/signUpPassword"
+        app:layout_constraintHorizontal_bias="0.976"
+        app:layout_constraintStart_toStartOf="@+id/signUpPassword"
+        app:layout_constraintTop_toTopOf="@+id/signUpPassword"
+        app:layout_constraintVertical_bias="0.58000004"
         app:srcCompat="@android:drawable/ic_menu_view" />
 
     <Button
@@ -78,7 +74,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInPassword"
+        app:layout_constraintTop_toBottomOf="@+id/signUpPassword"
         app:layout_constraintVertical_bias="0.038" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="238dp"
+        android:layout_height="238dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.119"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/signUpOption"
+        android:layout_width="55dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Sign Up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        app:layout_constraintVertical_bias="0.048" />
 </android.support.constraint.ConstraintLayout>
 

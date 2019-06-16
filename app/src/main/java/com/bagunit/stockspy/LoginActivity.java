@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
@@ -18,13 +19,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
     private EditText userEmail , userPassword;
     private Button loginButton;
+    private TextView signUp;
     private int viewPass = 0;
 
     @Override
@@ -44,13 +45,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //GOTO profile activity
         }
 
-        userEmail = findViewById(R.id.signInEmail);
-        userPassword = findViewById(R.id.signInPassword);
+        userEmail = findViewById(R.id.signUpEmail);
+        userPassword = findViewById(R.id.signUpPassword);
         loginButton = findViewById(R.id.loginButton);
+        signUp = findViewById(R.id.signUpOption);
         findViewById(R.id.showPassword).setOnClickListener(this);
         loginButton.setOnClickListener(this);
+        signUp.setOnClickListener(this);
 
-        System.out.println(viewPass);
 
     }
 
@@ -129,7 +131,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.loginButton:
+                hideKeyboard();
                 userLogin();
+                break;
+
+            case R.id.signUpOption:
+                startActivity(new Intent(LoginActivity.this , SignupActivity.class));
                 break;
 
         }
