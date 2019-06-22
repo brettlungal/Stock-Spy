@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if ( mAuth.getCurrentUser() != null ){
             finish();
-            //GOTO profile activity
+            startActivity( new Intent(LoginActivity.this , ProfileActivity.class) );
         }
 
         userEmail = findViewById(R.id.signUpEmail);
@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void userLogin(){
         String email = userEmail.getText().toString().trim();
         String pass = userPassword.getText().toString().trim();
+
 
         if ( email.isEmpty() ){
             userEmail.setError("Email is required");
@@ -84,6 +85,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             userPassword.requestFocus();
             return;
         }
+
+
+
         //now we have verified that we have valid credentials, lets login
 
         mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -91,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if ( task.isSuccessful() ){
                     finish();
-                    //launch the profile
+                    startActivity( new Intent( LoginActivity.this , ProfileActivity.class ) );
                 } else {
                     Toast.makeText(getApplicationContext() , "Username or password incorrect. Try again" , Toast.LENGTH_LONG).show();
                 }
@@ -113,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch ( v.getId() ){
 
             case R.id.showPassword:
-                System.out.println(viewPass);
+
                 if ( viewPass == 0 ){
                     viewPass = 1;
                     userPassword.setTransformationMethod(null);

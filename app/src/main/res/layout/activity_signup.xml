@@ -83,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/signUpPassword" />
 
     <ImageView
-        android:id="@+id/showPassword"
+        android:id="@+id/showPassSU"
         android:layout_width="37dp"
         android:layout_height="33dp"
         app:layout_constraintBottom_toBottomOf="@+id/signUpPassword"
@@ -92,6 +92,20 @@
         app:layout_constraintStart_toStartOf="@+id/signUpPassword"
         app:layout_constraintTop_toTopOf="@+id/signUpPassword"
         app:layout_constraintVertical_bias="0.58000004"
+        app:srcCompat="@android:drawable/ic_menu_view" />
+
+    <ImageView
+        android:id="@+id/showConfirmPassSU"
+        android:layout_width="37dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/signUpButton"
+        app:layout_constraintEnd_toEndOf="@+id/confirmPass"
+        app:layout_constraintHorizontal_bias="0.976"
+        app:layout_constraintStart_toStartOf="@+id/confirmPass"
+        app:layout_constraintTop_toBottomOf="@+id/signUpPassword"
+        app:layout_constraintVertical_bias="0.39"
         app:srcCompat="@android:drawable/ic_menu_view" />
 
     <Button
@@ -112,19 +126,36 @@
         app:layout_constraintVertical_bias="0.009" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="238dp"
-        android:layout_height="238dp"
+        android:id="@+id/stockSpyLogoSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.119"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.083"
+        app:srcCompat="@drawable/logoaltered" />
+
+    <TextView
+        android:id="@+id/loginOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Already a user? Login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpButton"
+        app:layout_constraintVertical_bias="0.011" />
+
 </android.support.constraint.ConstraintLayout>
 
