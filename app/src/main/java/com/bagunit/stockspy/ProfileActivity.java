@@ -1,45 +1,57 @@
 package com.bagunit.stockspy;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseAccess;
-    private TextView temp;
-
+public class ProfileActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-
-        temp = findViewById(R.id.s);
-
-        FirebaseUser user = mAuth.getCurrentUser();
-        String databasePath = user.getEmail().substring(0 , user.getEmail().indexOf("@"));
-        temp.setText(databasePath);
-
-        databaseAccess = database.getReference(databasePath);
-
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(this);
+        loadFragment( new HomeFragment() );
 
     }
 
-    @Override
-    public void onClick(View v) {
+    private boolean loadFragment(Fragment f){
+        if ( f != null ){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer , f ).commit();
+            return true;
+        }
+        return false;
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        Fragment frag = null;
+
+        switch( menuItem.getItemId() ){
+            case R.id.navigation_settings:
+                frag = new SettingsFragment();
+                break;
+
+            case R.id.navigation_portfolio:
+                frag = new PortfolioFragment();
+                break;
+
+            case R.id.navigation_home:
+                frag = new HomeFragment();
+                break;
+
+            case R.id.navigation_add:
+                frag = new AddspyFragment();
+                break;
+        }
+
+        return loadFragment(frag);
     }
 }
