@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/selector" />
 
     <EditText
-        android:id="@+id/ticker"
+        android:id="@+id/tickerName"
         android:layout_width="213dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
@@ -96,5 +96,5 @@
         android:inputType="number|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ticker" />
+        app:layout_constraintTop_toBottomOf="@+id/tickerName" />
 </android.support.constraint.ConstraintLayout>

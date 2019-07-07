@@ -1,11 +1,8 @@
 package com.bagunit.stockspy;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,6 +30,7 @@ import org.json.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -47,13 +45,14 @@ public class AddspyFragment extends Fragment implements View.OnClickListener , A
     private FirebaseAuth mAuth;
     private DatabaseReference dBase;
     private boolean isTSX = true;
+    private String tickerName;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View addView = inflater.inflate(R.layout.fragment_addspy , container , false );
         s = (TextView)addView.findViewById(R.id.selected);
-        tick = (EditText)addView.findViewById(R.id.ticker);
+        tick = (EditText)addView.findViewById(R.id.tickerName);
         dropdown = (Spinner)addView.findViewById(R.id.selector);
         buff = (EditText)addView.findViewById(R.id.bufferSize);
         addView.findViewById(R.id.addTick).setOnClickListener(this);
@@ -88,17 +87,18 @@ public class AddspyFragment extends Fragment implements View.OnClickListener , A
 
                     hideKeyboard();
                     String selectedTicker = tick.getText().toString().trim();
+                    tickerName = tick.getText().toString().trim();
                     theBuff = Double.parseDouble(buff.getText().toString().trim());
                     try{
                         if ( isTSX ){
-                            new CallbackTask().execute("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + selectedTicker + "&apikey=81PMPLMOASGL2QKM");
+
+                            new CallbackTask().execute("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + selectedTicker + "&apikey=81PMPLMOASGL2QKM").get(1000 , TimeUnit.MILLISECONDS);
                         }else {
                             //NASDAQ api
 
                         }
 
-                    Thread.sleep(1000);
-                }catch (InterruptedException e){
+                }catch (Exception e){
                     //suck a dick
                 }
                 if ( !(TextUtils.isEmpty(selectedTicker)) && theBuff != 0 ){
@@ -143,7 +143,7 @@ public class AddspyFragment extends Fragment implements View.OnClickListener , A
     public void sendNotification(){
 
         NotificationCompat.Builder build = new NotificationCompat.Builder(getActivity().getApplicationContext() , "Channel1")
-                .setSmallIcon(R.drawable.add).setContentTitle("Stock Spy").setContentText(tick.getText().toString().trim()+" price has fluctuated outside of bounds!").setPriority(NotificationCompat.PRIORITY_HIGH);
+                .setSmallIcon(R.drawable.add).setContentTitle("Stock Spy").setContentText(tickerName+ " price has fluctuated outside of bounds!").setPriority(NotificationCompat.PRIORITY_HIGH);
 
         manager.notify(1 , build.build());
 
@@ -179,8 +179,10 @@ public class AddspyFragment extends Fragment implements View.OnClickListener , A
 
                 JSONObject apiData = new JSONObject(data);
                 JSONObject global = apiData.getJSONObject("Global Quote");
+
                 if ( price == 0.0 ){
                     //get inital price but dont change it every call
+                    System.out.println("=====================\n"+global.length());
                     price = global.getDouble("05. price");
                 }
                 System.out.println("=======\nPrice: "+price);

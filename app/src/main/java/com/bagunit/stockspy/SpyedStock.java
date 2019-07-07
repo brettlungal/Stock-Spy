@@ -14,6 +14,13 @@ public class SpyedStock {
         this.isTSX = isTSX;
     }
 
+    public SpyedStock(){
+        ticker = id = "";
+        staticPrice = buffer = 0.0;
+        isTSX = false;
+    }
+
+
     public String getTicker() {
         return ticker;
     }
