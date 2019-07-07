@@ -10,17 +10,17 @@
 
     <Spinner
         android:id="@+id/selector"
+        style="@style/Widget.AppCompat.DropDownItem.Spinner"
         android:layout_width="172dp"
         android:layout_height="34dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:entries="@array/select_stock_exchange"
-        style="@style/Widget.AppCompat.DropDownItem.Spinner"
         android:textAlignment="center"
         android:touchscreenBlocksFocus="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
@@ -51,4 +51,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selector" />
+
+    <EditText
+        android:id="@+id/ticker"
+        android:layout_width="213dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/roundedinput"
+        android:ems="10"
+        android:hint="Enter Ticker"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selector" />
+
+    <Button
+        android:id="@+id/addTick"
+        android:layout_width="153dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/button_states"
+        android:text="Add Spy"
+        app:layout_constraintBottom_toTopOf="@+id/selected"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bufferSize" />
+
+    <EditText
+        android:id="@+id/bufferSize"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/roundedinput"
+        android:ems="10"
+        android:hint="Variation Buffer"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticker" />
 </android.support.constraint.ConstraintLayout>
