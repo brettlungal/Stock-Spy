@@ -64,8 +64,11 @@ public class PortfolioFragment extends Fragment implements View.OnClickListener 
                     stocks.add(spy);
                 }
 
-                SpyList adapter = new SpyList( getActivity() , stocks );
-                displayList.setAdapter(adapter);
+                if ( getActivity() != null ){
+                    SpyList adapter = new SpyList( getActivity() , stocks );
+                    displayList.setAdapter(adapter);
+                }
+
 
             }
 

@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.flags.impl.DataUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +47,7 @@ public class AddspyFragment extends Fragment implements View.OnClickListener , A
     private DatabaseReference dBase;
     private boolean isTSX = true;
     private String tickerName;
+    private String exchange;
 
     @Nullable
     @Override
@@ -87,12 +89,29 @@ public class AddspyFragment extends Fragment implements View.OnClickListener , A
 
                     hideKeyboard();
                     String selectedTicker = tick.getText().toString().trim();
-                    tickerName = tick.getText().toString().trim();
-                    theBuff = Double.parseDouble(buff.getText().toString().trim());
+
+                    String bufferValue = buff.getText().toString().trim();
+
+                    if ( selectedTicker.isEmpty() ){
+                        tick.setError("Please enter a ticker");
+                        tick.requestFocus();
+                        return;
+                    }
+
+                    if ( bufferValue.isEmpty() ){
+                        buff.setError("Please enter a buffer amount");
+                        buff.requestFocus();
+                        return;
+                    }
+
+                tickerName = tick.getText().toString().trim();
+                theBuff = Double.parseDouble(bufferValue);
+
+
                     try{
                         if ( isTSX ){
 
-                            new CallbackTask().execute("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + selectedTicker + "&apikey=81PMPLMOASGL2QKM").get(1000 , TimeUnit.MILLISECONDS);
+                            new CallbackTask().execute("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + exchange + selectedTicker + "&apikey=81PMPLMOASGL2QKM").get(1000 , TimeUnit.MILLISECONDS);
                         }else {
                             //NASDAQ api
 
@@ -108,6 +127,7 @@ public class AddspyFragment extends Fragment implements View.OnClickListener , A
                     Toast.makeText(getActivity().getApplicationContext(),"You are now spying on "+selectedTicker,Toast.LENGTH_SHORT).show();
                     tick.setText("");
                     buff.setText("");
+                    theBuff = 0;
                 }
 
                 break;
@@ -124,11 +144,13 @@ public class AddspyFragment extends Fragment implements View.OnClickListener , A
             case "TSX":
                 s.setText("TSX SELECTED");
                 isTSX = true;
+                exchange = "TSX:";
                 break;
 
             case "NYSE":
                 s.setText("NYSE SELECTED");
                 isTSX = false;
+                exchange = "NYSE:";
                 break;
 
         }
