@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         homeView.findViewById(R.id.stonks).setOnClickListener(this);
 
+
         return homeView;
     }
 
@@ -77,31 +78,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
 
-        dBase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for ( DataSnapshot data : dataSnapshot.getChildren() ){
-                    //iterate through the database, pull data and make an api call
-                    SpyedStock curr = data.getValue(SpyedStock.class);
-                    symbol = curr.getTicker();
-                    if ( curr.isTSX() ){
-                        exchange = "TSX:";
-                    }else {
-                        exchange = "NYSE:";
-                    }
-                    
-
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
     }
 
@@ -114,67 +91,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 sendNotification();
                 break;
 
-        }
-
-    }
-
-
-    private class CallbackTask extends AsyncTask<String,Integer,String> {
-
-        private int success;
-        private StringBuilder apiResult;
-
-        protected String doInBackground(String... params){
-
-
-            try{
-                URL url = new URL(params[0]);
-                HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
-
-
-                success = connection.getResponseCode();
-
-                if ( success == 200 ){
-                    System.out.println("===============YAY SUCCESS=================");
-                }
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                apiResult = new StringBuilder();
-                String line = null;
-                while ( (line = reader.readLine()) != null ){
-                    apiResult.append(line+"\n");
-                }
-
-                String data = apiResult.toString();
-
-                JSONObject apiData = new JSONObject(data);
-                JSONObject global = apiData.getJSONObject("Global Quote");
-
-                if ( price == 0.0 ){
-                    //get inital price but dont change it every call
-                    System.out.println("=====================\n"+global.length());
-                    price = global.getDouble("05. price");
-                }
-                System.out.println("=======\nPrice: "+price);
-
-                return apiResult.toString();
-
-            }catch(Exception e){
-                e.printStackTrace();
-                return e.toString();
-            }
-
-        }
-
-        protected void onPostExecute(String result){
-            super.onPostExecute(result);
-            System.out.println(result);
-            if ( success == 200 ) {
-                //s.setText(tick.getText().toString().trim()+" is trading for "+price+" per share");
-                //sendNotification();
-            }else{
-                Toast.makeText(getActivity() , "api call fail" , Toast.LENGTH_SHORT).show();
-
-            }
         }
 
     }
